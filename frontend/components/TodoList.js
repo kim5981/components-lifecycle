@@ -1,4 +1,5 @@
 import React from 'react'
+import Task from "./Todo.js";
 
 export default class TodoList extends React.Component {
   render() {
@@ -7,7 +8,7 @@ export default class TodoList extends React.Component {
             <h2>Tasks: </h2>
             <ul>
               { this.props.toDos.map( todo => {
-                return <li key={ todo.id } className={ `${ todo.completed }` }> { todo.task } </li>
+                return <Task key={ todo.id } todo={ todo }/>
               } ) }
             </ul>
           </div>
