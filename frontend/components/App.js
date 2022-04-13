@@ -15,7 +15,14 @@ const toDos = [
     ]
 
 export default class App extends React.Component {
+
+  state = {
+    task: "",
+    completed: false,
+    id: getId()
+  }
   render() {
+    
     return (
       <div className="app">
           <h1>To-Do List</h1>
