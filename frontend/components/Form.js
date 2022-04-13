@@ -5,15 +5,18 @@ export default class Form extends React.Component {
 
     const submit = evt => {
       evt.preventDefault()
+      this.props.addTask(evt.target.value, this.state.name)
       this.setState({
-        ...this.state,
-        task: "",
+        name: "",
         completed: false,
       })
     }
 
     const onChange = evt => {
-      console.log(evt.target.value)
+      this.setState({
+        ...this.state,
+        name: evt.target.value
+      })
     }
 
     return (
