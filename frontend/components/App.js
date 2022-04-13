@@ -3,11 +3,8 @@ import Form from "./Form.js";
 import List from "./TodoList.js";
 import axios from "axios"
 
-const fetchTasks = () => {
-  return axios.get("http://localhost:9000/api/todos")
-  .then( res => { return res.data })
-  .catch( err => console.error(err))
-}
+
+const URL = "http://localhost:9000/api/todos";
 
 let id = 0;
 const getId = () => id++
@@ -18,39 +15,35 @@ export default class App extends React.Component {
     toDos: []
   }
 
+  fetchTasks = () => {
+    axios.get(URL)
+    .then( res => {
+      this.setState({ ...this.state, toDos: res.data.data }) 
+      })
+    .catch( err => console.error(err))
+  }
+
   addTask = (evt, task) => {
     const newTask = {
       id: getId(),
       name: task,
       completed: false 
     }
-    // get input values from form (task, id) 
-    //set state with those values
     this.setState({
       ...this.state,
       toDos: [...this.state.toDos, newTask]
     })
   }
 
-  toggleClass = () => {
-  }
-
-
   toggleCompletedDisplay = () => {
 
   }
-
   
   componentDidMount () {
+    //fetch to-do array from server
     console.log("component has mounted")
     
-    fetchTasks()
-    .then( res => {
-      this.setState({
-        toDos: res.data
-      })
-      console.log(res.data)
-    })
+    this.fetchTasks()
   }
 
   render() {
